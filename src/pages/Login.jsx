@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import loginImage from "../assets/images/LoginImage.png";
 import webLogo from "../assets/icons/web-logo.png";
 import Arrow from "../assets/icons/arrow.png";
+import wavyUnderline from '../assets/icons/landingpage__wavy-underline.svg';
 import PrimaryButton from "../components/atoms/PrimaryButton";
 import SecondaryButton from "../components/atoms/SecondaryButton";
 import Facebook from "../assets/icons/logos_facebook.png";
@@ -77,133 +78,53 @@ const Login = () => {
   };
 
   return (
-    <section className="h-screen">
-      <div className="w-full flex">
-        <div className="hidden lg:block lg:w-[40%] bg-primary-50 min-h-screen h-full lg:px-[7%]">
-          <img className="pt-[5%] pl-[5%]" src={webLogo} alt="" />
-          <div>
-            <img className="mt-16" src={loginImage} alt="" />
-          </div>
-          <p className="text-neutral-600 text-center leading-8 lg:mt-8">
-            When you verify email address, your email marketing is more
-            effective, fraud prevention is improved and the ability to protect
-            your sender reputation increases.
-          </p>
+    <div className="font-campton h-screen p-8">
+      <section classList="">
+        <a
+        href="/"
+        className="font-cabinetGrotesk text-primary-500 font-bold text-2xl"
+      >
+        tech
+          <span className="text-secondary-500">mart</span>
+        </a>
+        <img className="hidden md:flex w-full" src={loginImage} alt="" />
+        <p className="hidden md:flex">Verify your email address to stay protected and get the best deals.</p>
+      </section>
+      <section>
+        <div className="flex flex-col items-center">
+          <h1 className="text-2xl text-center font-semibold font-cabinetGrotesk">Log In</h1>
+          <img className="w-min" src={wavyUnderline} alt="" />
         </div>
-        <div className="bg-white w-full lg:w-[60%] md:py-[3%] md:px-[8%] px-[5%] py-[5%]">
-          <div className="lg:hidden md:flex justify-between items-center hidden">
-            <img className="max-w-full" src={iPadLogo} alt="" />
-            <img src={Frame} alt="" />
+        <p className="my-6 text-neutral-900">Nice to see you again! Log in with details you entered during registration.</p>
+        <form onSubmit={formSubmissionHandler}>
+          <div className="flex flex-col my-3">
+            <label htmlFor="email">Email</label>
+            <input className="border border-neutral-600 rounded-xl p-3" type="email" id="email" value={enteredEmail} onChange={emailChangeHandler} onBlur={emailChangeBlur} />
+            {emailInvalid && <p className="text-red-500">Please enter a valid email address</p>}
           </div>
-          <div className="sm:hidden flex justify-between items-center">
-            <img src={MobileLogo} alt="" />
-            <img src={Frame} alt="" />
-          </div>
-          <div className="text-center mt-12 sm:mt-8 lg:mt-0">
-            <h4>Log In</h4>
-            <img className="mx-auto" src={Arrow} alt="" />
-          </div>
-          <p className="font-medium text-neutral-900 lg:mt-2 my-4 lg:mb-0">
-            Nice to see you again! Log In with details you entered during
-            registration.
-          </p>
-          <div className="py-4 lg:w-[90%]">
-            <form onSubmit={formSubmissionHandler}>
-              <div className="flex flex-col">
-                <label
-                  className="text-neutral-900 font-medium mb-1"
-                  htmlFor="Email"
-                >
-                  Email Address
-                </label>
-                <input
-                  className={`${
-                    emailInvalid && "border-error-500 bg-error-50"
-                  } ${emailValid && "border-success-500 bg-success-50"}`}
-                  type="email"
-                  id="Email"
-                  placeholder="Enter your Email Address"
-                  onChange={emailChangeHandler}
-                  onBlur={emailChangeBlur}
-                  value={enteredEmail}
-                />
-              </div>
-              <div className="relative flex flex-col">
-                <label
-                  className="text-neutral-900 font-medium mb-1"
-                  htmlFor="Password"
-                >
-                  Password
-                </label>
-                <input
-                  className={`${
-                    passwordInvalid && "border-error-500 bg-error-50"
-                  } ${passwordValid && "border-success-500 bg-success-50"}`}
-                  type={passwordType}
-                  id="Email"
-                  placeholder="Password"
-                  onChange={passwordChangeHandler}
-                  onBlur={passwordChangeBlur}
-                  value={enteredPassword}
-                />
-                <img
-                  className="w-6 absolute right-4 cursor-pointer translate-y-[170%]"
-                  src={
-                    passwordType === "password" ? HidePassword : ShowPassword
-                  }
-                  alt=""
-                  onClick={togglePasswordType}
-                />
-              </div>
-              <div className="flex justify-between items-center">
-                <div className="flex gap-2 items-center justify-center">
-                  <input
-                    className="flex items-center"
-                    type="checkbox"
-                    id="Remember"
-                  />
-                  <label htmlFor="Remember">Remember me</label>
-                </div>
-                <a className="text-neutral-900 font-bold text-[16px]" href="#">
-                  Forgot Password?
-                </a>
-              </div>
-              <div className="my-6">
-                <PrimaryButton disabled={!formIsValid}>Log In</PrimaryButton>
-              </div>
-            </form>
-            <div className="my-6 flex items-center justify-between">
-              <hr className="border w-[45%] border-b-neutral-500" />
-              <span className="relative px-2">OR</span>
-              <hr className="border w-[45%] border-b-neutral-500" />
+          <div className="flex flex-col">
+            <label htmlFor="password">Password</label>
+            <div className="flex items-center relative">
+              <input className="border border-neutral-600 rounded-xl p-3 w-full" type={passwordType} id="password" value={enteredPassword} onChange={passwordChangeHandler} onBlur={passwordChangeBlur} />
+              <img className="absolute right-4" src={passwordType == "password" ? HidePassword : ShowPassword} alt="" onClick={togglePasswordType} />
             </div>
-            <div className="flex gap-4 sm:gap-8 items-center md:flex-row flex-col">
-              <SecondaryButton>
-                <span className="flex items-center justify-center gap-2 ">
-                  <img src={Google} alt="" />
-                  Log in with Google
-                </span>
-              </SecondaryButton>
-              <SecondaryButton>
-                <span className="flex items-center justify-center gap-2 ">
-                  <img src={Facebook} alt="" />
-                  Log in with Facebook
-                </span>
-              </SecondaryButton>
+            {passwordInvalid && <p className="text-red-500 my-1">Password must be 8-24 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character</p>}
+          </div>
+          <div className="flex justify-between my-3">
+            <div className="flex items-center">
+              <input type="checkbox" id="remember" />
+              <label className="ml-1" htmlFor="remember">Remember me</label>
             </div>
+            <a href="/" className="text-primary-500">Forgot password?</a>
           </div>
-          <div className="md:fixed text-center my-4 sm:my-0 lg:mx-[10%] md:mx-[25%] lg:bottom-4 md:bottom-16">
-            <span>
-              Don't have an account?
-              <a href="#" className="text-primary-500 font-bold">
-                {" "}
-                Create an account
-              </a>
-            </span>
-          </div>
+          <PrimaryButton type="submit" disabled={!formIsValid}>Login</PrimaryButton>
+        </form> 
+        <div>
+          
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+    
   );
 };
 
